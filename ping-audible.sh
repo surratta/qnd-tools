@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # use this file if it's there
-PREFERRED_SOUND_FILE="$HOME/Sounds/Ping.wav"
+PREFERRED_SOUND_FILE="$HOME/Sounds/osx/Ping.wav"
 
 # if the above one isn't there, we'll search for this one using locate
 FALLBACK_SOUND_FILE="Ping.wav"
@@ -9,6 +9,11 @@ FALLBACK_SOUND_FILE="Ping.wav"
 PLAY_CMD="play"
 PING_CMD="ping -q -c 1 -W 2"
 
+which $PLAY_CMD > /dev/null
+if [ $? -ne 0 ]; then
+    echo "$PLAY_CMD command unavailable"
+    exit 1
+fi
 
 # validate invocation
 if [ $# -ne 1 ] && [ $# -ne 2 ]; then
